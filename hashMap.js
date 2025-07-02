@@ -11,7 +11,7 @@ function HashMap() {
       
         const primeNumber = 31;
         for (let i = 0; i < key.length; i++) {
-          hashCode = (primeNumber * hashCode + key.charCodeAt(i))%capacity;
+          hashCode = (primeNumber * hashCode + key.charCodeAt(i));
         }
      
         return hashCode;
@@ -22,6 +22,7 @@ function HashMap() {
         if (hashCode < 0 || hashCode >= capacity) {
             throw new Error("Trying to access index out of bounds");
         }
+        console.log(hashCode)
         return buckets[hashCode]
     }
 
@@ -46,7 +47,9 @@ function HashMap() {
 
 const newMap = HashMap()
 
-newMap.set("Test", "The great depression")
-newMap.set("Test", "The great recession")
+
 newMap.set("Test", "The great progression")
+newMap.set("Zealot", "The popular guy")
+//newMap.set("Corona", "The unpopular guy")
 console.log(newMap.bucket("Test").toString())
+console.log(newMap.bucket("Zealot").toString())
