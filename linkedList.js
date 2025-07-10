@@ -21,7 +21,7 @@ function createLinkedList(headValue=null){
 
     const size = () => {
         let tmp = head 
-        let nodeCount = head ? 1: 0
+        let nodeCount = head.value ? 1: 0
         while(tmp.nextNode !== null){
             nodeCount++
             tmp = tmp.nextNode
@@ -62,13 +62,16 @@ function createLinkedList(headValue=null){
 
     const pop = () => {
         let tmp = head 
-        let prev
         while(tmp.nextNode !==null){
             prev = tmp
             tmp = tmp.nextNode
         }
-        prev.nextNode = null
-
+        if(tmp===head){
+            head = createNode()
+        }else{
+            prev.nextNode = null
+        }
+       
 
     }
 
@@ -113,7 +116,7 @@ function createLinkedList(headValue=null){
 
     const removeAt = (index) => {
         if(index === 0){
-            head = head.nextNode
+            head = head.nextNode ? head.nextNode:createNode()
             return
         }
         let tmp = head 
@@ -145,9 +148,39 @@ function createLinkedList(headValue=null){
         return listString + "null"
     }
 
+    const keys = () => {
+        let tmp = head 
+        let keysArr = []
+       // console.log(tmp)
+        while(tmp !== null){
+            if(tmp.value) keysArr.push(tmp.value.key)
+            tmp = tmp.nextNode
+        }
+        return keysArr
+    }
+
+    const values = () => {
+        let tmp = head 
+        let valuesArr = []
+        while(tmp !== null){
+            if(tmp.value) valuesArr.push(tmp.value.value)
+            tmp = tmp.nextNode
+        }
+        return valuesArr
+    }
+    const entries = () => {
+        let tmp = head 
+        let entriesArr = []
+        while(tmp !== null){
+            if(tmp.value) entriesArr.push([tmp.value.key,tmp.value.value])
+            tmp = tmp.nextNode
+        }
+        return entriesArr
+    }
 
 
-    return {append, prepend, toString, size, getHead, getTail, at,pop,contains,find,insertAt,removeAt}
+
+    return {append, prepend, toString, size, getHead, getTail, at,pop,contains,find,insertAt,removeAt,keys, values,entries}
 
 }
 
